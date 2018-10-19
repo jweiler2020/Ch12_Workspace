@@ -13,14 +13,11 @@ public class NumberTwentyeight
 		printTriangle(triangle);
 	}
 	
-	public static int[][] pascalTriangle(int n)
-	{
-		return pascalTriangle(n, new int[n][]);
-	}
+	public static int[][] pascalTriangle(int n) { return pascalTriangle(0, new int[n][]); }
 	
 	private static int[][] pascalTriangle(int n, int[][] arr)
 	{
-		if(arr.length < n)
+		if(n < arr.length)
 		{
 			int[] cur = new int[n+1];
 			cur[0] = 1;
@@ -29,8 +26,8 @@ public class NumberTwentyeight
 			{
 				cur[i] = arr[n-1][i-1] + arr[n-1][i];
 			}
-			arr[n-1] = cur;
-			return pascalTriangle(n-1, arr);
+			arr[n] = cur;
+			return pascalTriangle(n+1, arr);
 		}
 		else
 			return arr;
@@ -38,9 +35,17 @@ public class NumberTwentyeight
 	
 	public static void printTriangle(int[][] arr)
 	{
-		for(int i = 0; i < arr.length; i++)
+		for(int[] i : arr)
 		{
-			System.out.println(arr[i]);
+			for(int k = 0; k < arr.length-i.length; k++)
+			{
+				System.out.print(" ");
+			}
+			for(int j : i)
+			{
+				System.out.print(j + " ");
+			}
+			System.out.println();
 		}
 	}
 }
